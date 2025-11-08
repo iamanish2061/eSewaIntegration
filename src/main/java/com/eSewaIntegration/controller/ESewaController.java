@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -113,21 +114,14 @@ public class ESewaController {
 
     //controller that handles successful transaction
     @RequestMapping("/payment-success")
-    public String paymentSuccess(HttpServletRequest request, HttpServletResponse response) {
-        ESewa details = (ESewa) request.getAttribute("paymentDetails");
-
-        //add to db with the help of service and repo classes
-
-        return "success"; // Place this in /src/main/resources/static/
+    public RedirectView redirectToSuccessPage(HttpServletRequest request, HttpServletResponse response) {
+        return new RedirectView("/success.html");
     }
 
     //controller that handles failed transaction
     @RequestMapping("/payment-failure")
-    public String paymentFailure(HttpServletRequest request, HttpServletResponse response) {
-
-        //add to db with the help of service and repo classes
-
-        return "failed";
+    public RedirectView redirectToFailurePage(HttpServletRequest request, HttpServletResponse response) {
+        return new RedirectView("/failure.html");
     }
 
 }
